@@ -762,7 +762,7 @@ def validate_ref(path, data):
         # `repr` causes the references to be loaded, if possible.
         repr(ref)
     except JsonRefError as e:
-        warnings.warn('ERROR: {} has {} at {}'.format(path, e.message, '/'.join(e.path)))
+        warnings.warn('ERROR: {} has {} at {}'.format(path, e.message, '/'.join(map(str, e.path))))
         return 1
 
     return 0
