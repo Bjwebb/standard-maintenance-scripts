@@ -222,7 +222,7 @@ def is_codelist(reader):
     """
     Returns whether the CSV is a codelist.
     """
-    return 'Code' in reader.fieldnames
+    return 'code' in reader.fieldnames
 
 
 def is_array_of_objects(data):
@@ -563,7 +563,7 @@ def validate_codelist_enum(*args):
                     if os.path.basename(csvpath) == data['codelist']:
                         # The codelist's CSV file should match the `enum` values, if the field is set.
                         if actual:
-                            expected = set([row['Code'] for row in reader])
+                            expected = set([row['code'] for row in reader])
 
                             # Add None if the field is nullable.
                             if 'string' in types and 'null' in types:

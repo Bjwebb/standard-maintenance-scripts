@@ -59,7 +59,7 @@ def is_codelist(fieldnames):
     """
     Returns whether the CSV is a codelist.
     """
-    return 'Code' in fieldnames
+    return 'code' in fieldnames
 
 
 def test_valid():
@@ -144,11 +144,11 @@ def test_codelist():
       "items": {
         "type": "object",
         "required": [
-          "Code"
+          "code"
         ],
         "additionalProperties": False,
         "properties": {
-          "Code": {
+          "code": {
             "title": "Code",
             "description": "The value to use in OCDS data.",
             "type": "string",
@@ -165,7 +165,7 @@ def test_codelist():
         if is_codelist(fieldnames):
             data = []
             for row_index, row in enumerate(rows, 2):
-                code = row['Code']
+                code = row['code']
                 if code in codes_seen:
                     any_errors = True
                     warnings.warn('{}: Duplicate code "{}" on row {}'.format(path, code, row_index))
@@ -175,7 +175,7 @@ def test_codelist():
                 for k, v in row.items():
                     if k in array_columns:
                         item[k] = v.split(', ')
-                    elif k == 'Code' or v:
+                    elif k == 'code' or v:
                         item[k] = v
                     else:
                         item[k] = None

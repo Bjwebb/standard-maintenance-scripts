@@ -6,25 +6,25 @@
   "items": {
     "type": "object",
     "required": [
-      "Code",
-      "Title",
-      "Description"
+      "code",
+      "title",
+      "description"
     ],
     "additionalProperties": false,
     "properties": {
-      "Code": {
+      "code": {
         "title": "Code",
         "description": "The value to use in OCDS data.",
         "type": "string",
         "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*$"
       },
-      "Title": {
+      "title": {
         "title": "Title",
         "description": "A short title for the code.",
         "type": "string",
         "minLength": 1
       },
-      "Description": {
+      "description": {
         "title": "Description",
         "description": "A longer-form description of the code.",
         "type": "string",
