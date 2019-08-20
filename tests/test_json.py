@@ -1023,6 +1023,8 @@ def test_empty_files():
         '.doctree',
         '.inv',
         '.pickle',
+        # Editor temporary files
+        '.swp'
     }
 
     for root, name in walk():
