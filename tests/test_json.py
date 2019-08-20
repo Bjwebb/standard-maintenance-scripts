@@ -913,6 +913,8 @@ def test_json_schema():
     extension, ensures JSON Schema files have required metadata and valid references.
     """
     for path, text, data in walk_json_data():
+        if path.endswith('schemapatches.json'):
+            continue
         if is_json_schema(data):
             basename = os.path.basename(path)
             if basename in ('release-schema.json', 'release-package-schema.json'):
