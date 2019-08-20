@@ -30,6 +30,15 @@
         "type": "string",
         "minLength": 1
       },
+      "technical note": {
+        "title": "Technical Note",
+        "description": "",
+        "type": [
+          "string",
+          "null"
+        ],
+        "minLength": 1
+      },
       "Business Logic": {
         "title": "Business Logic",
         "description": "A description of how this field's value relates to the values of other fields.",
