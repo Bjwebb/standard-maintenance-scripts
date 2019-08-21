@@ -3,6 +3,7 @@ import json
 import os
 import re
 import warnings
+import pathlib
 from collections import UserDict
 from copy import deepcopy
 
@@ -696,7 +697,9 @@ def validate_object_id(*args):
             required = data['items'].get('required', [])
 
             if hasattr(data['items'], '__reference__'):
-                original = data['items'].__reference__['$ref'][1:]
+                original = data['items'].__reference__['$ref']
+                if original.startswith('#'):
+                    original = original[1:]
             else:
                 original = pointer
 
@@ -756,7 +759,7 @@ def validate_merge_properties(*args):
 
 
 def validate_ref(path, data):
-    ref = JsonRef.replace_refs(data)
+    ref = JsonRef.replace_refs(data, base_uri=pathlib.Path(os.path.realpath(path)).as_uri())
 
     try:
         # `repr` causes the references to be loaded, if possible.
@@ -831,7 +834,8 @@ def validate_json_schema(path, data, schema, full_schema=not is_extension, top=c
             # Extensions aren't expected to repeat `title`, `description`, `type`.
             errors += validate_title_description_type(path, data)
             # Extensions aren't expected to repeat referenced `definitions`.
-            errors += validate_object_id(path, JsonRef.replace_refs(data))
+            ref = JsonRef.replace_refs(data, base_uri=pathlib.Path(os.path.realpath(path)).as_uri())
+            errors += validate_object_id(path, ref)
 
         if all(basename not in path for basename in exceptions_plus_versioned_and_packages):
             # Extensions aren't expected to repeat `required`. Packages don't have merge rules.
