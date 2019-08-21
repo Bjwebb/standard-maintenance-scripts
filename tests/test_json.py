@@ -666,6 +666,15 @@ def validate_object_id(*args):
         'changes',  # deprecated
         'records',  # uses `ocid` not `id`
         '0',  # linked releases
+        # BODS
+        'assertedBy',
+        'annotations',
+        'interests',
+        'pepStatusDetails',
+        'addresses',
+        'names',
+        'nationalities',
+        'taxResidencies',
     }
 
     required_id_exceptions = {
@@ -680,6 +689,9 @@ def validate_object_id(*args):
         '/definitions/ParticipationFee',
         # See https://github.com/open-contracting/ocds-extensions/issues/83
         '/definitions/Enquiry',
+        # BODS
+        '/definitions/Agent',
+        'components.json#/definitions/Identifier',
     }
 
     if repo_name == 'infrastructure':
