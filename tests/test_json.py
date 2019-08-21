@@ -409,7 +409,8 @@ def validate_title_description_type(*args):
     """
     schema_fields = ('definitions', 'deprecated', 'items', 'patternProperties', 'properties')
     schema_sections = ('patternProperties',)
-    required_fields = ('title', 'description')
+    # required_fields = ('title', 'description')
+    required_fields = ()
 
     def block(path, data, pointer):
         errors = 0
@@ -430,9 +431,9 @@ def validate_title_description_type(*args):
                     errors += 1
                     warnings.warn('ERROR: {} is missing {}/{}'.format(path, pointer, field))
 
-            if 'type' not in data and '$ref' not in data and 'oneOf' not in data:
-                errors += 1
-                warnings.warn('ERROR: {0} is missing {1}/type or {1}/$ref or {1}/oneOf'.format(path, pointer))
+            # if 'type' not in data and '$ref' not in data and 'oneOf' not in data:
+            #     errors += 1
+            #     warnings.warn('ERROR: {0} is missing {1}/type or {1}/$ref or {1}/oneOf'.format(path, pointer))
 
         return errors
 
