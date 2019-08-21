@@ -525,6 +525,12 @@ def validate_codelist_enum(*args):
         '/properties/tag',
         '/properties/initiationType',
     }
+    enum_exceptions_bods = {
+        '/definitions/Source/properties/type',
+        '/definitions/Annotation/anyOf/0/properties/motivation',
+        '/definitions/Annotation/anyOf/1/properties/motivation',
+        '/properties/statementType',
+    }
 
     def block(path, data, pointer):
         errors = 0
@@ -572,6 +578,8 @@ def validate_codelist_enum(*args):
                                 expected.add(None)
 
                             if actual != expected:
+                                if pointer == '/properties/statementType':
+                                    break
                                 added, removed = difference(actual, expected)
 
                                 errors += 1
@@ -587,7 +595,8 @@ def validate_codelist_enum(*args):
                         warnings.warn('ERROR: {} is missing codelist: {}'.format(path, data['codelist']))
         elif 'enum' in data and parent != 'items' or 'items' in data and 'enum' in data['items']:
             # Exception: This profile overwrites `enum`.
-            if repo_name not in exceptional_extensions or pointer not in enum_exceptions:
+            if ((repo_name not in exceptional_extensions or pointer not in enum_exceptions) and
+                    pointer not in enum_exceptions_bods):
                 # Fields with `enum` should set closed codelists.
                 errors += 1
                 warnings.warn('ERROR: {} has `enum` without codelist at {}'.format(path, pointer))
