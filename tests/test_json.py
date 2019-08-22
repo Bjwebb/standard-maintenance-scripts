@@ -887,12 +887,12 @@ def validate_json_schema(path, data, schema, full_schema=not is_extension, top=c
             else:
                 all_codelist_files = codelist_files
 
-            unused_codelists = [codelist for codelist in codelist_files if codelist not in codelist_values]
+            # unused_codelists = [codelist for codelist in codelist_files if codelist not in codelist_values]
             missing_codelists = [codelist for codelist in codelist_values if codelist not in all_codelist_files]
 
-            if unused_codelists:
-                errors += 1
-                warnings.warn('ERROR: {} has unused codelists: {}'.format(path, ', '.join(unused_codelists)))
+            # if unused_codelists:
+            #     errors += 1
+            #     warnings.warn('ERROR: {} has unused codelists: {}'.format(path, ', '.join(unused_codelists)))
             if missing_codelists:
                 errors += 1
                 warnings.warn('ERROR: repository is missing codelists: {}'.format(', '.join(missing_codelists)))
