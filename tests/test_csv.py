@@ -70,7 +70,7 @@ def test_valid():
     errors = 0
 
     for path, text, fieldnames, rows in walk_csv_data():
-        codelist = is_codelist(fieldnames)
+        # codelist = is_codelist(fieldnames)
         width = len(fieldnames)
         columns = []
 
@@ -100,10 +100,10 @@ def test_valid():
                             warnings.warn('ERROR: {} {} "{}" has leading or trailing whitespace at {},{}'.format(
                                 path, header, cell, row_index, col_index))
 
-        for col_index, column in enumerate(columns, 1):
-            if not any(column) and codelist:
-                errors += 1
-                warnings.warn('ERROR: {} has empty column {}'.format(path, col_index))
+        # for col_index, column in enumerate(columns, 1):
+        #     if not any(column) and codelist:
+        #         errors += 1
+        #         warnings.warn('ERROR: {} has empty column {}'.format(path, col_index))
 
         output = StringIO()
         writer = csv.DictWriter(output, fieldnames=fieldnames, lineterminator='\n')
