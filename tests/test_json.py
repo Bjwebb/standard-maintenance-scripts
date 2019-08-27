@@ -704,7 +704,6 @@ def validate_object_id(*args):
         # See https://github.com/open-contracting/ocds-extensions/issues/83
         '/definitions/Enquiry',
         # BODS
-        '/definitions/Agent',
         'components.json#/definitions/Identifier',
     }
 
