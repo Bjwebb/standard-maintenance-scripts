@@ -109,6 +109,10 @@ metaschema['properties']['mergeOptions'] = {
         'unique': {'type': 'boolean'},
     },
 }
+metaschema['properties']['version'] = {
+    'type': 'string',
+    'enum': ['0.2'],
+}
 
 # Draft 6 removes `minItems` from `definitions/stringArray`.
 # See https://github.com/open-contracting-extensions/ocds_api_extension/blob/master/release-package-schema.json#L2
